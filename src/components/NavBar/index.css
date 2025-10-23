@@ -1,0 +1,23 @@
+.NavBar {
+  padding: 20px 100px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #16455D;
+}
+
+.NavBar > * {
+  width: 100%;
+}
+
+.LeftBar {
+  display: flex;
+  justify-content: start;
+  gap: 20px;
+}
+
+.RightBar {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 20px;
+}

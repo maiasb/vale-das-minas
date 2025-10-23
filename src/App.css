@@ -1,18 +1,31 @@
 #root {
   background-image: url('./assets/bar-molhado.jpg');
+  width: 100%;
   height: 100vh;
-  background-size: cover;
+  background-size: auto;
   background-repeat: no-repeat;
-  /* background-position: center; */
+  background-position: end;
   background-color: #242424;
 }
 
-@media only screen and (max-width: 1200px) {
+/* @media only screen and (max-width: 1280px) {
   #root {
     background-size: auto;
     background-repeat: no-repeat;
     background-position: center;
   }
+} */
+
+/* @media only screen and (max-width: 1140px) {
+  #root {
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: start;
+  }
+} */
+
+body {
+  margin: 0;
 }
 
 .divButton {

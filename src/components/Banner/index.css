@@ -1,6 +1,5 @@
 .banner {
   display: flex;
-  padding: 0px 10px;
 }
 
 .banner > * {
@@ -12,20 +11,20 @@
   display: flex;
   flex-direction: column;
   margin-top: 100px;
-  text-align: center;
-  color: #16455D;
-  font-size: 25px;
 }
 
-.text > * {
-  margin: 15px auto;
+.text {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: #16455D;
+  gap: 30px;
 }
 
 .morfologia-left {
-  margin: 0px;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
 .morfologia-right {
@@ -35,10 +34,18 @@
   align-items: end;
 }
 
-.morfologia-rotate {
-  transform: rotate(45deg);
+.copy {
+  font-family: "Schibsted Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
-.morfologiaPart {
-  transform: scaleX(-1);
+.biggest {
+  font-weight: 800;
+  font-size: 35px;
+}
+
+.smallest {
+  font-weight: 400;
+  font-size: 25px;
 }

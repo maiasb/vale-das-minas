@@ -1,7 +1,7 @@
 import './index.css'
-import whatsappIcon from '../../assets/whatsapp.svg'
-import InstagramIcon from '../../assets/instagram.svg'
-import EmailIcon from '../../assets/email.svg'
+import whatsappIcon from '../../assets/whatsapp.png'
+import InstagramIcon from '../../assets/instagram.png'
+import EmailIcon from '../../assets/email.png'
 import LogoValeDasMinas from '../../assets/vale-das-minas-logo.png'
 
 export function NavBar() {

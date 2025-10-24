@@ -1,11 +1,13 @@
 #root {
-  background-image: url('./assets/bar-molhado.jpg');
+  /* background-image: url('./assets/bar-molhado.jpg'); */
   width: 100%;
   height: 100vh;
-  background-size: auto;
+  /* background-size: auto; */
+  background-size: 200px;
   background-repeat: no-repeat;
-  background-position: end;
+  background-position: center;
   background-color: #242424;
+  overflow: hidden;
 }
 
 /* @media only screen and (max-width: 1280px) {

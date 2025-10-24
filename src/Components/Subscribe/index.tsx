@@ -4,13 +4,14 @@ import morfologia1 from '../../assets/morfologia-1.png'
 import morfologia2 from '../../assets/morfologia-2.png'
 import { TextField } from '../TextField'
 import { useState } from 'react'
+import { object, string, number, ValidationError } from 'yup';
 
 type FormProps = {
   name: string
   profession: string
   phoneNumber: string
   email: string
-  income: string
+  income: number | null
   maritalStatus: string
   vehicle: string
 }
@@ -19,22 +20,65 @@ type SubscribeProps = {
   changeStepSubscribe(): void
 }
 
+type FormErrors = {
+  name?: string
+  profession?: string
+  phoneNumber?: string
+  email?: string
+  income?: string
+  maritalStatus?: string
+  vehicle?: string
+}
+
+const formSchema = object({
+  name: string().default('').required(),
+  profession: string().default('').required(),
+  phoneNumber: string().default('').required(),
+  email: string().default('').email().required(),
+  income: number().default(null).nullable(),
+  maritalStatus: string().default('').required(),
+  vehicle: string().default('').required(),
+});
+
 export function Subscribe({changeStepSubscribe}: SubscribeProps) {
-    const [form, setForm] = useState<FormProps>({
+  const [erros, setErros] = useState<FormErrors>({})
+
+  const [form, setForm] = useState<FormProps>({
     name: "",
     profession: "",
     phoneNumber: "",
     email: "",
-    income: "",
+    income: null,
     maritalStatus: "",
     vehicle: "",
   })
 
   function logon() {
-    alert("Cadastro com sucesso!")
-    console.log(form)
-    changeStepSubscribe()
+    formSchema.validate( form, { abortEarly: false } )
+    .then(() => {
+        setErros({
+          name: "",
+          profession: "",
+          phoneNumber: "",
+          email: "",
+          income: "",
+          maritalStatus: "",
+          vehicle: "",
+        })
+      changeStepSubscribe()
+    })
+    .catch((error: ValidationError) => {
+    const newErrors: Record<string, string> = {};
+
+    error.inner.forEach((e) => {
+      if (e.path) newErrors[e.path] = e.message;
+    });
+
+    setErros(newErrors);
+  });
   }
+
+  console.log(erros);
 
   return (
     <div className='form'>
@@ -44,31 +88,31 @@ export function Subscribe({changeStepSubscribe}: SubscribeProps) {
       <div className='content-subscribe'>
         <div className='textField-subscribe'>
           <label>Seu nome completo*</label>
-          <TextField text={form.name} onChange={(e) => setForm({...form, name: e.target.value})}/>
+          <TextField name="name" text={form.name} onChange={(e) => setForm({...form, name: e.target.value})}/>
         </div>
         <div className='textField-subscribe'>
           <label>Profissão*</label>
-          <TextField text={form.profession} onChange={(e) => setForm({...form, profession: e.target.value})}/>
+          <TextField name="profession" text={form.profession} onChange={(e) => setForm({...form, profession: e.target.value})}/>
         </div>
         <div className='textField-subscribe'>
           <label>Telefone*</label>
-          <TextField text={form.phoneNumber} onChange={(e) => setForm({...form, phoneNumber: e.target.value})}/>
+          <TextField name="phoneNumber" text={form.phoneNumber} onChange={(e) => setForm({...form, phoneNumber: e.target.value})}/>
         </div>
         <div className='textField-subscribe'>
           <label>E-mail</label>
-          <TextField text={form.email} onChange={(e) => setForm({...form, email: e.target.value})}/>
+          <TextField name="email" text={form.email} onChange={(e) => setForm({...form, email: e.target.value})}/>
         </div>
         <div className='textField-subscribe'>
           <label>Renda Familiar</label>
-          <TextField text={form.income} onChange={(e) => setForm({...form, income: e.target.value})}/>
+          <TextField name="income" text={form.income ? form.income.toString() : ""} onChange={(e) => setForm({...form, income: parseInt(e.target.value, 10)})}/>
         </div>
         <div className='textField-subscribe'>
           <label>Estado Civil</label>
-          <TextField text={form.maritalStatus} onChange={(e) => setForm({...form, maritalStatus: e.target.value})}/>
+          <TextField name="maritalStatus" text={form.maritalStatus} onChange={(e) => setForm({...form, maritalStatus: e.target.value})}/>
         </div>
         <div className='textField-subscribe'>
           <label>Veículo*</label>
-          <TextField text={form.vehicle} onChange={(e) => setForm({...form, name: e.target.value})}/>
+          <TextField name="vehicle" text={form.vehicle} onChange={(e) => setForm({...form, vehicle: e.target.value})}/>
         </div>
       <div className='div-button-subscribe'>
         <Button text="CADASTRAR" onClick={logon} />

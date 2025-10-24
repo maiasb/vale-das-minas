@@ -1,12 +1,13 @@
 type InputProps = {
+  name?: string,
   text?: string,
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export function TextField({text, onChange}:InputProps) {
+export function TextField({name, text, onChange}:InputProps) {
   return (
     <>
-      <input onChange={onChange} value={text} />
+      <input name={name} onChange={onChange} value={text} />
     </>
   )
 }

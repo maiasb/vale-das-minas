@@ -5,11 +5,21 @@ import './index.css'
 import { useState } from 'react'
 import { TextField } from '../TextField'
 
-type SubscribeProps = {
-  onClick(): void
+type FormProps = {
+  name: string
+  profession: string
+  phoneNumber: string
+  email: string
+  income: string
+  maritalStatus: string
+  vehicle: string
 }
 
-export function Subscribe({onClick}:SubscribeProps) {
+type SubscribeProps = {
+  setForm(form: FormProps): void
+}
+
+export function Subscribe({setForm}: SubscribeProps) {
     const [name, setName] = useState("")
     const [profession, setProfession] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
@@ -17,6 +27,18 @@ export function Subscribe({onClick}:SubscribeProps) {
     const [income, setIncome] = useState("")
     const [maritalStatus, setMaritalStatus] = useState("")
     const [vehicle, setVehicle] = useState("")
+
+    function updateForm() {
+      setForm({
+        name,
+        profession,
+        phoneNumber,
+        email,
+        income,
+        maritalStatus,
+        vehicle
+      })
+    }
 
   return (
     <div className='form'>
@@ -53,7 +75,7 @@ export function Subscribe({onClick}:SubscribeProps) {
           <TextField text={vehicle} onChange={setVehicle}/>
         </div>
       <div className='div-button-subscribe'>
-        <Button text="CADASTRAR" onClick={onClick} />
+        <Button text="CADASTRAR" onClick={updateForm} />
       </div>
       </div>
       <div className='morfologia-right-subscribe'>

@@ -4,7 +4,7 @@ import morfologia2 from '../../assets/morfologia-2.png'
 import { Button } from "../Button";
 
 type BannerProps = {
-  onClick?(): void
+  onClick(): void
 }
 
 export function Banner({onClick}:BannerProps) {
@@ -20,7 +20,7 @@ export function Banner({onClick}:BannerProps) {
           <label className='copy smallest'>Garanta seu lugar nesse projeto incrível
             e venha viver essa aventura com a gente!</label>
         </div>
-      <div className='divButton'>
+      <div className='div-button'>
         <Button text="INSCREVA-SE" onClick={onClick} />
       </div>
       </div>

@@ -1,0 +1,53 @@
+.form {
+  display: flex;
+}
+
+.form > * {
+  width: 100%;
+}
+
+.content-subscribe {
+  min-width: 600px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.text-subscribe {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: #16455D;
+  gap: 30px;
+}
+
+.morfologia-left-subscribe {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.morfologia-right-subscribe {
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.textField-subscribe {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.textField-subscribe > * {
+  width: 100%;
+}
+
+.div-button-subscribe {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  gap: 10px;
+  align-items: center;
+}

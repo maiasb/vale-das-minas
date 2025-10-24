@@ -1,8 +1,8 @@
 import './index.css'
 
 type ButtonProps = {
-  text?: string,
-  onClick?(): void
+  text: string,
+  onClick(): void
 }
 
 function Button({text, onClick}:ButtonProps) {

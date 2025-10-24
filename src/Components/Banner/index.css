@@ -10,7 +10,8 @@
   min-width: 600px;
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
+  margin-top: 50px;
+  margin-bottom: 30px;
 }
 
 .text {
@@ -48,4 +49,12 @@
 .smallest {
   font-weight: 400;
   font-size: 25px;
+}
+
+.div-button {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  gap: 10px;
+  align-items: center;
 }

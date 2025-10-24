@@ -1,9 +1,9 @@
+import './index.css'
 import { Button } from '../Button'
 import morfologia1 from '../../assets/morfologia-1.png'
 import morfologia2 from '../../assets/morfologia-2.png'
-import './index.css'
-import { useState } from 'react'
 import { TextField } from '../TextField'
+import { useState } from 'react'
 
 type FormProps = {
   name: string
@@ -16,29 +16,25 @@ type FormProps = {
 }
 
 type SubscribeProps = {
-  setForm(form: FormProps): void
+  changeStepSubscribe(): void
 }
 
-export function Subscribe({setForm}: SubscribeProps) {
-    const [name, setName] = useState("")
-    const [profession, setProfession] = useState("")
-    const [phoneNumber, setPhoneNumber] = useState("")
-    const [email, setEmail] = useState("")
-    const [income, setIncome] = useState("")
-    const [maritalStatus, setMaritalStatus] = useState("")
-    const [vehicle, setVehicle] = useState("")
+export function Subscribe({changeStepSubscribe}: SubscribeProps) {
+    const [form, setForm] = useState<FormProps>({
+    name: "",
+    profession: "",
+    phoneNumber: "",
+    email: "",
+    income: "",
+    maritalStatus: "",
+    vehicle: "",
+  })
 
-    function updateForm() {
-      setForm({
-        name,
-        profession,
-        phoneNumber,
-        email,
-        income,
-        maritalStatus,
-        vehicle
-      })
-    }
+  function logon() {
+    alert("Cadastro com sucesso!")
+    console.log(form)
+    changeStepSubscribe()
+  }
 
   return (
     <div className='form'>
@@ -48,34 +44,34 @@ export function Subscribe({setForm}: SubscribeProps) {
       <div className='content-subscribe'>
         <div className='textField-subscribe'>
           <label>Seu nome completo*</label>
-          <TextField text={name} onChange={setName}/>
+          <TextField text={form.name} onChange={(e) => setForm({...form, name: e.target.value})}/>
         </div>
         <div className='textField-subscribe'>
           <label>Profissão*</label>
-          <TextField text={profession} onChange={setProfession}/>
+          <TextField text={form.profession} onChange={(e) => setForm({...form, profession: e.target.value})}/>
         </div>
         <div className='textField-subscribe'>
           <label>Telefone*</label>
-          <TextField text={phoneNumber} onChange={setPhoneNumber}/>
+          <TextField text={form.phoneNumber} onChange={(e) => setForm({...form, phoneNumber: e.target.value})}/>
         </div>
         <div className='textField-subscribe'>
           <label>E-mail</label>
-          <TextField text={email} onChange={setEmail}/>
+          <TextField text={form.email} onChange={(e) => setForm({...form, email: e.target.value})}/>
         </div>
         <div className='textField-subscribe'>
           <label>Renda Familiar</label>
-          <TextField text={income} onChange={setIncome}/>
+          <TextField text={form.income} onChange={(e) => setForm({...form, income: e.target.value})}/>
         </div>
         <div className='textField-subscribe'>
           <label>Estado Civil</label>
-          <TextField text={maritalStatus} onChange={setMaritalStatus}/>
+          <TextField text={form.maritalStatus} onChange={(e) => setForm({...form, maritalStatus: e.target.value})}/>
         </div>
         <div className='textField-subscribe'>
           <label>Veículo*</label>
-          <TextField text={vehicle} onChange={setVehicle}/>
+          <TextField text={form.vehicle} onChange={(e) => setForm({...form, name: e.target.value})}/>
         </div>
       <div className='div-button-subscribe'>
-        <Button text="CADASTRAR" onClick={updateForm} />
+        <Button text="CADASTRAR" onClick={logon} />
       </div>
       </div>
       <div className='morfologia-right-subscribe'>

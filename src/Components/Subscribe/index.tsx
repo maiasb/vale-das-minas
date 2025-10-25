@@ -90,9 +90,9 @@ export function Subscribe({isMobile, changeStepSubscribe}: SubscribeProps) {
       </div>)
       }
         <div className='content-subscribe'>
-          <TextField label='Seu nome completo*' name="name" text={form.name} placeholder='Digite seu nome aqui' errorMessage={erros.name} onChange={(e) => setForm({...form, name: e.target.value})} onBlur={(e) => validateField('name', e.target.value)} />
-          <TextField label='Telefone*' name="phoneNumber" text={form.phoneNumber}  placeholder='Digite seu número de telefone aqui' errorMessage={erros.phoneNumber} onChange={(e) => setForm({...form, phoneNumber: e.target.value})} onBlur={(e) => validateField('phoneNumber', e.target.value)} />
-          <TextField label='E-mail*' name="email" text={form.email} errorMessage={erros.email} placeholder='Digite seu email aqui' onChange={(e) => setForm({...form, email: e.target.value})} onBlur={(e) => validateField('email', e.target.value)} />
+          <TextField label='Seu nome completo *' name="name" text={form.name} placeholder='Digite seu nome aqui' errorMessage={erros.name} onChange={(e) => setForm({...form, name: e.target.value})} onBlur={(e) => validateField('name', e.target.value)} />
+          <TextField label='Telefone *' name="phoneNumber" text={form.phoneNumber}  placeholder='Digite seu número de telefone aqui' errorMessage={erros.phoneNumber} onChange={(e) => setForm({...form, phoneNumber: e.target.value})} onBlur={(e) => validateField('phoneNumber', e.target.value)} />
+          <TextField label='E-mail *' name="email" text={form.email} errorMessage={erros.email} placeholder='Digite seu email aqui' onChange={(e) => setForm({...form, email: e.target.value})} onBlur={(e) => validateField('email', e.target.value)} />
           <TextField label='Profissão' name="profession" text={form.profession}  placeholder='Digite sua profissão aqui' onChange={(e) => setForm({...form, profession: e.target.value})} onBlur={(e) => validateField('profession', e.target.value)} />
           <TextField label='Renda Familiar' name="income" text={form.income ? form.income.toString() : ""} placeholder='Digite sua renda familiar' onChange={(e) => setForm({...form, income: parseInt(e.target.value, 10)})}/>
           <TextField label='Estado Civil' name="maritalStatus" text={form.maritalStatus} placeholder='Digite seu estado civil' onChange={(e) => setForm({...form, maritalStatus: e.target.value})} onBlur={(e) => validateField('maritalStatus', e.target.value)} />

@@ -1,5 +1,6 @@
 .form {
   display: flex;
+  justify-content: center;
 }
 
 .form > * {
@@ -7,10 +8,21 @@
 }
 
 .content-subscribe {
-  min-width: 600px;
+  width: 3500px;
+  padding: 50px;
   display: flex;
   flex-direction: column;
   margin-top: 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 50px;
+}
+
+@media screen and (max-width: 1140px){
+    .content-subscribe {
+        margin-left: 50px;
+        margin-right: 50px;
+        height: 500px;
+    }
 }
 
 .text-subscribe {
@@ -34,20 +46,14 @@
   align-items: end;
 }
 
-.textField-subscribe {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.textField-subscribe > * {
-  width: 100%;
-}
-
 .div-button-subscribe {
   display: flex;
   flex-direction: column;
   margin-top: 10px;
   gap: 10px;
   align-items: center;
+}
+
+.error {
+  color: red;
 }

@@ -21,3 +21,9 @@
   align-items: center;
   gap: 20px;
 }
+
+@media screen and (max-width: 1140px){
+  .NavBar {
+    padding: 10px 50px;
+  }
+}

@@ -16,7 +16,7 @@ function App() {
 
   return (
     <>
-        <NavBar />
+        <NavBar isMobile={isMobile} />
         {
           isSubscribe ? (<Subscribe isMobile={isMobile} changeStepSubscribe={changeStepSubscribe} />) : (<Banner isMobile={isMobile} changeStepSubscribe={changeStepSubscribe} />)
         }

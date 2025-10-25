@@ -54,6 +54,17 @@ export function Subscribe({isMobile, changeStepSubscribe}: SubscribeProps) {
     vehicle: "",
   })
 
+  function validateField(fieldName: keyof FormProps, value: string | number | null) {
+    formSchema
+      .validateAt(fieldName, { [fieldName]: value })
+      .then(() => {
+        setErros((prev) => ({ ...prev, [fieldName]: '' }))
+      })
+      .catch((error: ValidationError) => {
+        setErros((prev) => ({ ...prev, [fieldName]: error.message }))
+      })
+  }
+
   function logon() {
     formSchema.validate( form, { abortEarly: false } )
     .then(() => {
@@ -86,31 +97,17 @@ export function Subscribe({isMobile, changeStepSubscribe}: SubscribeProps) {
         <img src={morfologia1} width={270} />
       </div>)
       }
-      <div className='content-subscribe'>
-        <div className='textField-subscribe'>
-          <TextField label='Seu nome completo*' name="name" text={form.name} errorMessage={erros.name} onChange={(e) => setForm({...form, name: e.target.value})}/>
-        </div>
-        <div className='textField-subscribe'>
-          <TextField label='Profissão*' name="profession" text={form.profession} errorMessage={erros.profession} onChange={(e) => setForm({...form, profession: e.target.value})}/>
-        </div>
-        <div className='textField-subscribe'>
-          <TextField label='Telefone*' name="phoneNumber" text={form.phoneNumber} errorMessage={erros.phoneNumber} onChange={(e) => setForm({...form, phoneNumber: e.target.value})}/>
-        </div>
-        <div className='textField-subscribe'>
-          <TextField label='E-mail' name="email" text={form.email} errorMessage={erros.email} onChange={(e) => setForm({...form, email: e.target.value})}/>
-        </div>
-        <div className='textField-subscribe'>
+        <div className='content-subscribe'>
+          <TextField label='Seu nome completo*' name="name" text={form.name} errorMessage={erros.name} onChange={(e) => setForm({...form, name: e.target.value})} onBlur={(e) => validateField('name', e.target.value)} />
+          <TextField label='Profissão*' name="profession" text={form.profession} errorMessage={erros.profession} onChange={(e) => setForm({...form, profession: e.target.value})} onBlur={(e) => validateField('profession', e.target.value)} />
+          <TextField label='Telefone*' name="phoneNumber" text={form.phoneNumber} errorMessage={erros.phoneNumber} onChange={(e) => setForm({...form, phoneNumber: e.target.value})} onBlur={(e) => validateField('phoneNumber', e.target.value)} />
+          <TextField label='E-mail*' name="email" text={form.email} errorMessage={erros.email} onChange={(e) => setForm({...form, email: e.target.value})} onBlur={(e) => validateField('email', e.target.value)} />
           <TextField label='Renda Familiar' name="income" text={form.income ? form.income.toString() : ""} errorMessage={erros.income} onChange={(e) => setForm({...form, income: parseInt(e.target.value, 10)})}/>
+          <TextField label='Estado Civil*' name="maritalStatus" text={form.maritalStatus} errorMessage={erros.maritalStatus} onChange={(e) => setForm({...form, maritalStatus: e.target.value})} onBlur={(e) => validateField('maritalStatus', e.target.value)} />
+          <TextField label='Veículo*' name="vehicle" text={form.vehicle} errorMessage={erros.vehicle} onChange={(e) => setForm({...form, vehicle: e.target.value})} onBlur={(e) => validateField('vehicle', e.target.value)} />
+        <div className='div-button-subscribe'>
+          <Button text="CADASTRAR" onClick={logon} />
         </div>
-        <div className='textField-subscribe'>
-          <TextField label='Estado Civil' name="maritalStatus" text={form.maritalStatus} errorMessage={erros.maritalStatus} onChange={(e) => setForm({...form, maritalStatus: e.target.value})}/>
-        </div>
-        <div className='textField-subscribe'>
-          <TextField label='Veículo*' name="vehicle" text={form.vehicle} errorMessage={erros.vehicle} onChange={(e) => setForm({...form, vehicle: e.target.value})}/>
-        </div>
-      <div className='div-button-subscribe'>
-        <Button text="CADASTRAR" onClick={logon} />
-      </div>
       </div>
       {
         isMobile && (<div className='morfologia-right-subscribe'>

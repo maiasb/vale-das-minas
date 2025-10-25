@@ -1,6 +1,11 @@
 .form {
   display: flex;
   justify-content: center;
+  height: 100vh;
+  background-image: url('../../assets/bg-subscribe-x.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .form > * {
@@ -8,9 +13,10 @@
 }
 
 .content-subscribe {
-  width: 3500px;
-  padding: 50px;
   display: flex;
+  width: 3500px;
+  height: 500px;
+  padding: 50px;
   flex-direction: column;
   margin-top: 30px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);

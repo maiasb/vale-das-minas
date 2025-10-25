@@ -1,5 +1,10 @@
 .banner {
   display: flex;
+  height: 100vh;
+  background-image: url('../../assets/bar-molhado.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .banner > * {

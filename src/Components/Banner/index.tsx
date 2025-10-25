@@ -9,8 +9,6 @@ type BannerProps = {
 }
 
 export function Banner({isMobile, changeStepSubscribe}:BannerProps) {
-
-
   return (
     <div className="banner">
       {

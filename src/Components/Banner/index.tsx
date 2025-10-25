@@ -4,15 +4,22 @@ import morfologia2 from '../../assets/morfologia-2.png'
 import { Button } from "../Button";
 
 type BannerProps = {
+  isMobile: boolean,
   changeStepSubscribe(): void
 }
 
-export function Banner({changeStepSubscribe}:BannerProps) {
+export function Banner({isMobile, changeStepSubscribe}:BannerProps) {
+
+
   return (
     <div className="banner">
-      <div className='morfologia-left'>
+      {
+        isMobile && (
+          <div className='morfologia-left'>
         <img src={morfologia1} width={270} />
       </div>
+        )
+      }
       <div className='content'>
         <div className='text'>
           <label className='copy biggest'>O MAIOR PARQUE AQUÁTICO DO
@@ -24,9 +31,13 @@ export function Banner({changeStepSubscribe}:BannerProps) {
         <Button text="INSCREVA-SE" onClick={changeStepSubscribe} />
       </div>
       </div>
-      <div className='morfologia-right'>
+      {
+        isMobile && (
+          <div className='morfologia-right'>
         <img src={morfologia2} width={270} />
       </div>
+        )
+      }
     </div>
   )
 }

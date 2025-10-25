@@ -17,6 +17,7 @@ type FormProps = {
 }
 
 type SubscribeProps = {
+  isMobile: boolean,
   changeStepSubscribe(): void
 }
 
@@ -40,7 +41,7 @@ const formSchema = object({
   vehicle: string().default('').required("Preencha seu veículo corretamente."),
 });
 
-export function Subscribe({changeStepSubscribe}: SubscribeProps) {
+export function Subscribe({isMobile, changeStepSubscribe}: SubscribeProps) {
   const [erros, setErros] = useState<FormErrors>({})
 
   const [form, setForm] = useState<FormProps>({
@@ -80,9 +81,11 @@ export function Subscribe({changeStepSubscribe}: SubscribeProps) {
 
   return (
     <div className='form'>
-      <div className='morfologia-left-subscribe'>
+      {
+        isMobile && (<div className='morfologia-left-subscribe'>
         <img src={morfologia1} width={270} />
-      </div>
+      </div>)
+      }
       <div className='content-subscribe'>
         <div className='textField-subscribe'>
           <TextField label='Seu nome completo*' name="name" text={form.name} errorMessage={erros.name} onChange={(e) => setForm({...form, name: e.target.value})}/>
@@ -109,9 +112,11 @@ export function Subscribe({changeStepSubscribe}: SubscribeProps) {
         <Button text="CADASTRAR" onClick={logon} />
       </div>
       </div>
-      <div className='morfologia-right-subscribe'>
+      {
+        isMobile && (<div className='morfologia-right-subscribe'>
         <img src={morfologia2} width={270} />
-      </div>
+      </div>)
+      }
     </div>
   )
 }

@@ -8,7 +8,7 @@ type ButtonProps = {
 function Button({text, onClick}:ButtonProps) {
 
   return (
-    <button onClick={onClick} className='button'>{text}</button>
+    <button onClick={onClick}>{text}</button>
   )
 }
 

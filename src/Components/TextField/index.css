@@ -1,5 +1,30 @@
 .textField {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
+  font-family: "Schibsted Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  color: #16455D;
+}
+
+input {
+  border: none;
+  border-bottom: 2px solid #16455D;
+  background-color: transparent;
+  outline: none;
+}
+
+input::placeholder {
+  color: #999;
+  font-style: italic;
+  font-weight: bold;
+}
+
+input:focus {
+  border-bottom-color: #2C391C; /* muda pra azul ao focar, por exemplo */
+}
+
+.error {
+  color: red;
 }

@@ -1,7 +1,7 @@
 .banner {
   display: flex;
   height: 100vh;
-  background-image: url('../../assets/bar-molhado.jpg');
+  background-image: url('../../assets/render-bg.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

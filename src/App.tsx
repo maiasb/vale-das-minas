@@ -4,7 +4,6 @@ import { Banner } from './components/Banner'
 import { NavBar } from './components/NavBar'
 import { Subscribe } from './components/Subscribe'
 import { useMediaQuery } from 'react-responsive';
-import morfologiaBottom from '../src/assets/morfologia-mobile.png'
 
 function App() {
   const [isSubscribe, setIsSubscribe] = useState(false)
@@ -19,14 +18,6 @@ function App() {
         <NavBar isMobile={isMobile} />
         {
           isSubscribe ? (<Subscribe isMobile={isMobile} changeStepSubscribe={changeStepSubscribe} />) : (<Banner isMobile={isMobile} changeStepSubscribe={changeStepSubscribe} />)
-        }
-        {
-          !isMobile &&
-          (
-            <div className='rodape-banner'>
-              <img className='morfologia-bottom' src={morfologiaBottom} width={270} />
-            </div>
-          )
         }
     </>
   )

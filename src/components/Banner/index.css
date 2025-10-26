@@ -26,6 +26,12 @@
   gap: 30px;
 }
 
+@media screen and (min-width: 1340px){
+  .text {
+    min-width: 800px;
+  }
+}
+
 .morfologia-left {
   margin-top: 10px;
   display: flex;
@@ -40,7 +46,7 @@
 }
 
 .copy {
-  font-family: "Schibsted Grotesk", sans-serif;
+  font-family: "Bricolage Grotesque", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
 }

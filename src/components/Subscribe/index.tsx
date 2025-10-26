@@ -61,17 +61,17 @@ export function Subscribe({isMobile, changeStepSubscribe}: SubscribeProps) {
       })
   }
 
-  function sendToSheets() {
-    console.log(form)
-    const response = fetch("https://script.google.com/macros/s/AKfycbwgLhkkOoeYulKL7mNd2EgJXej6fbv17fR15Ovy6YPhyv2FHSxtU1JqdWzFM1TRvfW_kw/exec", {
-      method: "POST",
-      body: JSON.stringify(form),
-      headers: { "Content-Type": "application/json" },
-    });
+  // function sendToSheets() {
+  //   console.log(form)
+  //   const response = fetch("https://script.google.com/macros/s/AKfycbwgLhkkOoeYulKL7mNd2EgJXej6fbv17fR15Ovy6YPhyv2FHSxtU1JqdWzFM1TRvfW_kw/exec", {
+  //     method: "POST",
+  //     body: JSON.stringify(form),
+  //     headers: { "Content-Type": "application/json" },
+  //   });
 
-    console.log(response)
-    return response;
-  }
+  //   console.log(response)
+  //   return response;
+  // }
 
   function logon() {
     formSchema.validate( form, { abortEarly: false } )
@@ -81,8 +81,7 @@ export function Subscribe({isMobile, changeStepSubscribe}: SubscribeProps) {
           phoneNumber: "",
           email: ""
         })
-        const response = sendToSheets();
-        console.log(response)
+        changeStepSubscribe()
     })
     .catch((error: ValidationError) => {
     const newErrors: Record<string, string> = {};

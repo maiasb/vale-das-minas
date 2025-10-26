@@ -11,6 +11,8 @@
     "deploy": "aws s3 sync dist/ s3://valedasminaspark.com.br"
   },
   "dependencies": {
+    "google-auth-library": "^10.4.2",
+    "google-spreadsheet": "^5.0.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-responsive": "^10.0.1",

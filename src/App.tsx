@@ -1,8 +1,8 @@
 import './App.css'
 import { useState } from 'react'
-import { Banner } from './Components/Banner'
-import { NavBar } from './Components/NavBar'
-import { Subscribe } from './Components/Subscribe'
+import { Banner } from './components/Banner'
+import { NavBar } from './components/NavBar'
+import { Subscribe } from './components/Subscribe'
 import { useMediaQuery } from 'react-responsive';
 import morfologiaBottom from '../src/assets/morfologia-mobile.png'
 

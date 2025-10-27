@@ -8,7 +8,7 @@ type InputProps = {
   placeholder?: string,
   errorMessage?: string,
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 export function TextField({label, name, type, text, placeholder, errorMessage, onChange, onBlur}:InputProps) {

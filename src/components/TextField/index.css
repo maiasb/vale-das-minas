@@ -22,7 +22,7 @@ input::placeholder {
 }
 
 input:focus {
-  border-bottom-color: #2C391C; /* muda pra azul ao focar, por exemplo */
+  border-bottom-color: #2C391C;
 }
 
 .error {

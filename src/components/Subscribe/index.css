@@ -1,10 +1,13 @@
-.form {
+.subscribe {
   display: flex;
-  height: 100vh;
+  flex-direction: column;
   background-image: url('../../assets/bg-subscribe-x.png');
-  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.form {
+  display: flex;
 }
 
 .form > * {
@@ -14,7 +17,6 @@
 .content-subscribe {
   display: flex;
   width: 3500px;
-  height: 520px;
   padding: 50px;
   flex-direction: column;
   margin-top: 30px;
@@ -27,6 +29,13 @@
     .content-subscribe {
         margin-left: 50px;
         margin-right: 50px;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .content-subscribe {
+        margin-left: 20px;
+        margin-right: 20px;
     }
 }
 
@@ -61,4 +70,10 @@
 
 .error {
   color: red;
+}
+
+.morfologia-bottom-subscribe {
+  width: 100%;
+  height: auto;
+  display: block;
 }

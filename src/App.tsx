@@ -1,6 +1,6 @@
 import './App.css'
 import { useState } from 'react'
-import { Banner } from './components/Banner'
+import { Home } from './components/Home'
 import { NavBar } from './components/NavBar'
 import { Subscribe } from './components/Subscribe'
 import { useMediaQuery } from 'react-responsive';
@@ -15,9 +15,9 @@ function App() {
 
   return (
     <>
-        <NavBar isMobile={isMobile} />
+        <NavBar />
         {
-          isSubscribe ? (<Subscribe isMobile={isMobile} changeStepSubscribe={changeStepSubscribe} />) : (<Banner isMobile={isMobile} changeStepSubscribe={changeStepSubscribe} />)
+          isSubscribe ? (<Subscribe isMobile={isMobile} changeStepSubscribe={changeStepSubscribe} />) : (<Home changeStepSubscribe={changeStepSubscribe} />)
         }
     </>
   )

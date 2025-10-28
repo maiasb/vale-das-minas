@@ -1,6 +1,5 @@
 #root {
-  height: 100vh;
-  overflow: hidden;
+  font-family: "Bricolage Grotesque", sans-serif;
 }
 
 body {
@@ -8,16 +7,15 @@ body {
 }
 
 .rodape-banner {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.morfologia-bottom {
-  width: 100%;
-  height: auto;
-  display: block;
+h1 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
 }

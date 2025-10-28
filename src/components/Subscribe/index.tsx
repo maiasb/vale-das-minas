@@ -96,8 +96,8 @@ export function Subscribe({isMobile, changeStepSubscribe}: SubscribeProps) {
   }
 
   return (
-    <div>
-        <div className='form'>
+        <div className='subscribe'>
+          <div className='form'>
         {
           isMobile && (<div className='morfologia-left-subscribe'>
           <img src={morfologia1} width={270} />
@@ -121,17 +121,14 @@ export function Subscribe({isMobile, changeStepSubscribe}: SubscribeProps) {
         </div>)
         }
       </div>
-
-      <div>
-                {
-          !isMobile &&
-          (
-            <div className='rodape-banner'>
-              <img className='morfologia-bottom' src={morfologiaBottom} width={270} />
-            </div>
-          )
-        }
-      </div>
-    </div>
+      {
+        !isMobile &&
+        (
+          <div className='rodape-banner'>
+            <img className='morfologia-bottom-subscribe' src={morfologiaBottom} width={270} />
+          </div>
+        )
+      }
+        </div>
   )
 }

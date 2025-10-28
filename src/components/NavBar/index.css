@@ -27,3 +27,13 @@
     padding: 10px 50px;
   }
 }
+
+.logo {
+  width: 130px;
+}
+
+@media screen and (max-width: 720px){
+  .logo {
+    width: 100px;
+  }
+}

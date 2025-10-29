@@ -5,24 +5,26 @@
   font-optical-sizing: auto;
   font-style: normal;
   color: #16455D;
-  margin-bottom: 20px;
+  gap: 5px;
 }
 
 input {
-  border: none;
-  border-bottom: 2px solid #999;
-  background-color: transparent;
+  padding: 1em;
+  border-radius: 8px;
+  border: 2px solid #f7dfb9;
+  background-color: #feedd1;
+  color: #16455d;
   outline: none;
 }
 
 input::placeholder {
-  color: #999;
+  color: #aaaa91;
   font-style: italic;
   font-weight: bold;
 }
 
 input:focus {
-  border-bottom-color: #2C391C;
+  border-color: #efc683;
 }
 
 .error {

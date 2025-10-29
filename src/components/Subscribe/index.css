@@ -21,14 +21,27 @@
 
 .content-subscribe {
   display: flex;
-  width: 3500px;
+  width: 100%;
+  margin: auto;
   padding: 50px;
   flex-direction: column;
   margin-top: 100px;
   margin-bottom: 30px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   border-radius: 50px;
-  gap: 5px;
+}
+
+.div-content-subscribe {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.div-content-subscribe-part {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
 }
 
 @media screen and (max-width: 1140px){
@@ -36,6 +49,10 @@
         margin-left: 50px;
         margin-right: 50px;
         margin-top: 50px;
+    }
+
+    .div-content-subscribe {
+      flex-direction: column;
     }
 }
 
@@ -83,4 +100,8 @@
   width: 100%;
   height: auto;
   display: block;
+}
+
+.last {
+  margin-bottom: 20px;
 }

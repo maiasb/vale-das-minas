@@ -8,13 +8,13 @@ import { object, string, number, ValidationError } from 'yup';
 import morfologiaBottom from '../../assets/morfologia-mobile.png'
 
 type FormProps = {
-  name: string
-  profession: string
-  phoneNumber: string
+  nome: string
+  profissao: string
+  telefone: string
   email: string
-  income: number | null
-  maritalStatus: string
-  vehicle: string
+  renda: number | null
+  estado: string
+  veiculo: string
 }
 
 type SubscribeProps = {
@@ -23,32 +23,32 @@ type SubscribeProps = {
 }
 
 type FormErrors = {
-  name?: string
-  phoneNumber?: string
+  nome?: string
+  telefone?: string
   email?: string
 }
 
 const formSchema = object({
-  name: string().default('').required("Preencha seu nome corretamente."),
-  phoneNumber: string().default('').required("Preencha seu telefone corretamente."),
+  nome: string().default('').required("Preencha seu nome corretamente."),
+  telefone: string().default('').required("Preencha seu telefone corretamente."),
   email: string().default('').email("E-mail precisa ser válido.").required("Preencha seu e-mail corretamente."),
-  profession: string().default(''),
-  income: number().default(null).nullable(),
-  maritalStatus: string().default(''),
-  vehicle: string().default(''),
+  profissao: string().default(''),
+  renda: number().default(null).nullable(),
+  estado: string().default(''),
+  veiculo: string().default(''),
 });
 
 export function Subscribe({isMobile, changeStepSubscribe}: SubscribeProps) {
   const [erros, setErros] = useState<FormErrors>({})
 
   const [form, setForm] = useState<FormProps>({
-    name: "",
-    profession: "",
-    phoneNumber: "",
+    nome: "",
+    profissao: "",
+    telefone: "",
     email: "",
-    income: null,
-    maritalStatus: "",
-    vehicle: "",
+    renda: null,
+    estado: "",
+    veiculo: "",
   })
 
   function validateField(fieldName: keyof FormProps, value: string | number | null) {
@@ -62,26 +62,27 @@ export function Subscribe({isMobile, changeStepSubscribe}: SubscribeProps) {
       })
   }
 
-  // function sendToSheets() {
-  //   console.log(form)
-  //   const response = fetch("https://script.google.com/macros/s/AKfycbwgLhkkOoeYulKL7mNd2EgJXej6fbv17fR15Ovy6YPhyv2FHSxtU1JqdWzFM1TRvfW_kw/exec", {
-  //     method: "POST",
-  //     body: JSON.stringify(form),
-  //     headers: { "Content-Type": "application/json" },
-  //   });
+  function sendForm() {
+    const response = fetch("https://n8n.fehshop.com/webhook/pag-nova", {
+      method: "POST",
+      body: JSON.stringify(form),
+      headers: { "Content-Type": "application/json" },
+    });
 
-  //   console.log(response)
-  //   return response;
-  // }
+    alert("Cadastro realizado com sucesso!")
+
+    return response;
+  }
 
   function logon() {
     formSchema.validate( form, { abortEarly: false } )
     .then(() => {
         setErros({
-          name: "",
-          phoneNumber: "",
+          nome: "",
+          telefone: "",
           email: ""
         })
+        sendForm()
         changeStepSubscribe()
     })
     .catch((error: ValidationError) => {
@@ -106,18 +107,18 @@ export function Subscribe({isMobile, changeStepSubscribe}: SubscribeProps) {
           <div className='content-subscribe'>
             <div className='div-content-subscribe'>
               <div className='div-content-subscribe-part'>
-                <TextField label='Seu nome completo *' name="name" text={form.name} placeholder='Digite seu nome aqui' errorMessage={erros.name} onChange={(e) => setForm({...form, name: e.target.value})} onBlur={(e) => validateField('name', e.target.value)} />
-                <TextField label='Telefone *' name="phoneNumber" text={form.phoneNumber}  placeholder='Digite seu número de telefone aqui' errorMessage={erros.phoneNumber} onChange={(e) => setForm({...form, phoneNumber: e.target.value})} onBlur={(e) => validateField('phoneNumber', e.target.value)} />
+                <TextField label='Seu nome completo *' name="name" text={form.nome} placeholder='Digite seu nome aqui' errorMessage={erros.nome} onChange={(e) => setForm({...form, nome: e.target.value})} onBlur={(e) => validateField('nome', e.target.value)} />
+                <TextField label='Telefone *' name="phoneNumber" text={form.telefone}  placeholder='Digite seu número de telefone aqui' errorMessage={erros.telefone} onChange={(e) => setForm({...form, telefone: e.target.value})} onBlur={(e) => validateField('telefone', e.target.value)} />
                 <TextField label='E-mail *' name="email" text={form.email} errorMessage={erros.email} placeholder='Digite seu email aqui' onChange={(e) => setForm({...form, email: e.target.value})} onBlur={(e) => validateField('email', e.target.value)} />
               </div>
               <div className='div-content-subscribe-part last'>
-                <TextField label='Renda Familiar' name="income" text={form.income ? form.income.toString() : ""} placeholder='Digite sua renda familiar' onChange={(e) => setForm({...form, income: parseInt(e.target.value, 10)})}/>
-                <TextField label='Estado Civil' name="maritalStatus" text={form.maritalStatus} placeholder='Digite seu estado civil' onChange={(e) => setForm({...form, maritalStatus: e.target.value})} onBlur={(e) => validateField('maritalStatus', e.target.value)} />
-                <TextField label='Veículo' name="vehicle" text={form.vehicle} onChange={(e) => setForm({...form, vehicle: e.target.value})} placeholder='Digite seu veículo aqui' onBlur={(e) => validateField('vehicle', e.target.value)} />
+                <TextField label='Renda Familiar' name="income" text={form.renda ? form.renda.toString() : ""} placeholder='Digite sua renda familiar' onChange={(e) => setForm({...form, renda: parseInt(e.target.value, 10)})}/>
+                <TextField label='Estado Civil' name="maritalStatus" text={form.estado} placeholder='Digite seu estado civil' onChange={(e) => setForm({...form, estado: e.target.value})} onBlur={(e) => validateField('estado', e.target.value)} />
+                <TextField label='Veículo' name="vehicle" text={form.veiculo} onChange={(e) => setForm({...form, veiculo: e.target.value})} placeholder='Digite seu veículo aqui' onBlur={(e) => validateField('veiculo', e.target.value)} />
               </div>
             </div>
 
-          <TextField label='Profissão' name="profession" text={form.profession}  placeholder='Digite sua profissão aqui' onChange={(e) => setForm({...form, profession: e.target.value})} onBlur={(e) => validateField('profession', e.target.value)} />
+          <TextField label='Profissão' name="profession" text={form.profissao}  placeholder='Digite sua profissão aqui' onChange={(e) => setForm({...form, profissao: e.target.value})} onBlur={(e) => validateField('profissao', e.target.value)} />
 
           <div className='div-button-subscribe'>
             <Button text="CADASTRAR" onClick={logon} />

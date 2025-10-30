@@ -1,16 +1,14 @@
 import './index.css'
 import morfologia1 from '../../assets/morfologia-1.png'
 import morfologia2 from '../../assets/morfologia-2.png'
-import { Button } from "../Button";
+import { Button } from "../../components/Button";
 import morfologiaBottom from '../../assets/morfologia-mobile.png'
 import { useMediaQuery } from 'react-responsive';
+import { useNavigate } from 'react-router'
 
-type BannerProps = {
-  changeStepSubscribe(): void
-}
-
-export function Home({ changeStepSubscribe }:BannerProps) {
+export function Home() {
   const isMobile = useMediaQuery({ query: `(min-width: 900px)` });
+  const navigate = useNavigate()
 
   return (
     <div className='home'>
@@ -30,7 +28,7 @@ export function Home({ changeStepSubscribe }:BannerProps) {
             e venha viver essa aventura com a gente!</p>
         </div>
       <div className='div-button'>
-        <Button text="INSCREVA-SE" onClick={changeStepSubscribe} />
+        <Button text="INSCREVA-SE" onClick={() => navigate('/cadastro')} />
       </div>
       </div>
       {

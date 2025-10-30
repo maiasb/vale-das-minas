@@ -1,11 +1,12 @@
 import './index.css'
-import { Button } from '../Button'
+import { Button } from '../../components/Button'
 import morfologia1 from '../../assets/morfologia-1.png'
 import morfologia2 from '../../assets/morfologia-2.png'
-import { TextField } from '../TextField'
+import { TextField } from '../../components/TextField'
 import { useState } from 'react'
 import { object, string, number, ValidationError } from 'yup';
 import morfologiaBottom from '../../assets/morfologia-mobile.png'
+import { useMediaQuery } from 'react-responsive'
 
 type FormProps = {
   nome: string
@@ -15,11 +16,6 @@ type FormProps = {
   renda: number | null
   estado: string
   veiculo: string
-}
-
-type SubscribeProps = {
-  isMobile: boolean,
-  changeStepSubscribe(): void
 }
 
 type FormErrors = {
@@ -38,9 +34,9 @@ const formSchema = object({
   veiculo: string().default(''),
 });
 
-export function Subscribe({isMobile, changeStepSubscribe}: SubscribeProps) {
+export function Subscribe() {
+  const isMobile = useMediaQuery({ query: `(min-width: 1140px)` });
   const [erros, setErros] = useState<FormErrors>({})
-
   const [form, setForm] = useState<FormProps>({
     nome: "",
     profissao: "",
@@ -83,7 +79,6 @@ export function Subscribe({isMobile, changeStepSubscribe}: SubscribeProps) {
           email: ""
         })
         sendForm()
-        changeStepSubscribe()
     })
     .catch((error: ValidationError) => {
     const newErrors: Record<string, string> = {};

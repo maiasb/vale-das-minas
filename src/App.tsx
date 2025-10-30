@@ -11,7 +11,7 @@ function App() {
         <NavBar />
         <BrowserRouter>
           <Routes>
-            <Route path="/" Component={Home} />
+            <Route path="/socios" Component={Home} />
             <Route path="/cadastro" Component={Subscribe} />
           </Routes>
         </BrowserRouter>

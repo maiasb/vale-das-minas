@@ -1,5 +1,5 @@
 import './index.css'
-import whatsappIcon from '../../assets/whatsapp.png'
+// import whatsappIcon from '../../assets/whatsapp.png'
 import InstagramIcon from '../../assets/instagram.png'
 import EmailIcon from '../../assets/email.png'
 import LogoValeDasMinas from '../../assets/vale-das-minas-logo.png'
@@ -17,15 +17,15 @@ export function NavBar() {
         {
           isMobile && (
             <>
-              <a href='#' target='_blank'>
-          <img src={whatsappIcon} alt="whatsapp-icon" width={30}/>
-        </a>
-        <a href='#' target='_blank'>
-          <img src={InstagramIcon} alt="instagram-icon" width={30} />
-        </a>
-        <a href='#' target='_blank'>
-          <img src={EmailIcon} alt="email-icon" width={30}/>
-        </a>
+              {/* <a href='https://wa.me/5591982540124?text=Oi%20Vale%20das%20Minas!%20Quero%20saber%20mais%20sobre%20o%20parque!' target='_blank'>
+                <img src={whatsappIcon} alt="whatsapp-icon" width={30}/>
+              </a> */}
+              <a href='https://www.instagram.com/valedasminaspark/' target='_blank'>
+                <img src={InstagramIcon} alt="instagram-icon" width={30} />
+              </a>
+              <a href='mailto:valdasminas6@gmail.com?subject=Contato%20pelo%20site' target='_blank'>
+                <img src={EmailIcon} alt="email-icon" width={30}/>
+              </a>
             </>
           )
         }

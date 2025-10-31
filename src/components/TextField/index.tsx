@@ -15,7 +15,7 @@ export function TextField({label, name, type, text, placeholder, errorMessage, o
   return (
     <div className={`textField ${errorMessage ? 'error' : ''}`}>
       {label ?? (<label>{label}</label>)}
-      <input name={name} type={type} value={text} placeholder={placeholder} onChange={onChange} onBlur={onBlur} />
+      <input name={name} type={type} value={text ? text : ''} placeholder={placeholder} onChange={onChange} onBlur={onBlur} />
       {errorMessage ?? (<span>{errorMessage}</span>)}
     </div>
   )

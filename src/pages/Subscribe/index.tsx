@@ -4,7 +4,7 @@ import morfologia1 from '../../assets/morfologia-1.png'
 import morfologia2 from '../../assets/morfologia-2.png'
 import { TextField } from '../../components/TextField'
 import { useState } from 'react'
-import { object, string, number, ValidationError } from 'yup';
+import { object, string,number, ValidationError } from 'yup';
 import morfologiaBottom from '../../assets/morfologia-mobile.png'
 import { useMediaQuery } from 'react-responsive'
 
@@ -22,7 +22,15 @@ type FormErrors = {
   nome?: string
   telefone?: string
   email?: string
+  renda?: string
+  estado?: string
+  profissao?: string
+  veiculo?: string
 }
+
+type MyObjectType = {
+  [key: number]: { label: string; name: string, placeholder: string, text: string | number | null, erro?: string};
+};
 
 const formSchema = object({
   nome: string().default('').required("Preencha seu nome corretamente."),
@@ -37,6 +45,7 @@ const formSchema = object({
 export function Subscribe() {
   const isMobile = useMediaQuery({ query: `(min-width: 1140px)` });
   const [erros, setErros] = useState<FormErrors>({})
+  const [step, setStep] = useState(0);
   const [form, setForm] = useState<FormProps>({
     nome: "",
     profissao: "",
@@ -46,6 +55,19 @@ export function Subscribe() {
     estado: "",
     veiculo: "",
   })
+
+  function handleChangeStep() {
+    // validateField(FormSteps[step].name as keyof FormProps, FormSteps[step].text)
+    formSchema
+      .validateAt(FormSteps[step].name, { [FormSteps[step].name]: FormSteps[step].text })
+      .then(() => {
+        setErros((prev) => ({ ...prev, [FormSteps[step].name]: '' }))
+        setStep(e => e + 1)
+      })
+      .catch((error: ValidationError) => {
+        setErros((prev) => ({ ...prev, [FormSteps[step].name]: error.message }))
+      })
+  }
 
   function validateField(fieldName: keyof FormProps, value: string | number | null) {
     formSchema
@@ -76,7 +98,11 @@ export function Subscribe() {
         setErros({
           nome: "",
           telefone: "",
-          email: ""
+          email: "",
+          renda: "",
+          estado: "",
+          veiculo: "",
+          profissao: "",
         })
         sendForm()
     })
@@ -91,6 +117,58 @@ export function Subscribe() {
   });
   }
 
+  const FormSteps: MyObjectType = {
+    0: {
+      label: "Nome completo *",
+      name: "nome",
+      placeholder: "Digite seu nome aqui",
+      text: form.nome,
+      erro: erros.nome
+    },
+    1: {
+      label: "Telefone *",
+      name: "telefone",
+      placeholder: "Digite seu telefone aqui",
+      text: form.telefone,
+      erro: erros.telefone
+    },
+    2: {
+      label: "Email *",
+      name: "email",
+      placeholder: "Digite seu email aqui",
+      text: form.email,
+      erro: erros.email
+    },
+    3: {
+      label: "Renda familiar",
+      name: "renda",
+      placeholder: "Digite sua renda aqui",
+      text: form.renda,
+      erro: erros.renda
+    },
+    4: {
+      label: "Estado civil",
+      name: "estado",
+      placeholder: "Digite seu estado civil aqui",
+      text: form.estado,
+      erro: ""
+    },
+    5: {
+      label: "Veículo",
+      name: "veiculo",
+      placeholder: "Digite seu veiculo aqui",
+      text: form.veiculo,
+      erro: ""
+    },
+    6: {
+      label: "Profissão",
+      name: "profissao",
+      placeholder: "Digite sua profissão",
+      text: form.profissao,
+      erro: ""
+    },
+  };
+
   return (
         <div className='subscribe'>
           <div className='form'>
@@ -100,23 +178,20 @@ export function Subscribe() {
         </div>)
         }
           <div className='content-subscribe'>
-            <div className='div-content-subscribe'>
-              <div className='div-content-subscribe-part'>
-                <TextField label='Seu nome completo *' name="name" text={form.nome} placeholder='Digite seu nome aqui' errorMessage={erros.nome} onChange={(e) => setForm({...form, nome: e.target.value})} onBlur={(e) => validateField('nome', e.target.value)} />
-                <TextField label='Telefone *' name="phoneNumber" text={form.telefone}  placeholder='Digite seu número de telefone aqui' errorMessage={erros.telefone} onChange={(e) => setForm({...form, telefone: e.target.value})} onBlur={(e) => validateField('telefone', e.target.value)} />
-                <TextField label='E-mail *' name="email" text={form.email} errorMessage={erros.email} placeholder='Digite seu email aqui' onChange={(e) => setForm({...form, email: e.target.value})} onBlur={(e) => validateField('email', e.target.value)} />
-              </div>
-              <div className='div-content-subscribe-part last'>
-                <TextField label='Renda Familiar' name="income" text={form.renda ? form.renda.toString() : ""} placeholder='Digite sua renda familiar' onChange={(e) => setForm({...form, renda: parseInt(e.target.value, 10)})}/>
-                <TextField label='Estado Civil' name="maritalStatus" text={form.estado} placeholder='Digite seu estado civil' onChange={(e) => setForm({...form, estado: e.target.value})} onBlur={(e) => validateField('estado', e.target.value)} />
-                <TextField label='Veículo' name="vehicle" text={form.veiculo} onChange={(e) => setForm({...form, veiculo: e.target.value})} placeholder='Digite seu veículo aqui' onBlur={(e) => validateField('veiculo', e.target.value)} />
-              </div>
-            </div>
-
-          <TextField label='Profissão' name="profession" text={form.profissao}  placeholder='Digite sua profissão aqui' onChange={(e) => setForm({...form, profissao: e.target.value})} onBlur={(e) => validateField('profissao', e.target.value)} />
-
+            <TextField
+              label={FormSteps[step].label}
+              name={FormSteps[step].name}
+              text={FormSteps[step].text?.toString()}
+              placeholder={FormSteps[step].placeholder} errorMessage={FormSteps[step].erro}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  [FormSteps[step].name]: e.target.value,
+                })}
+              onBlur={(e) => validateField(FormSteps[step].name as keyof FormProps, e.target.value)}
+            />
           <div className='div-button-subscribe'>
-            <Button text="CADASTRAR" onClick={logon} />
+            <Button text={step == 6 ? 'CADASTRAR' : 'AVANÇAR'} onClick={step == 6 ? logon : handleChangeStep} />
           </div>
         </div>
         {

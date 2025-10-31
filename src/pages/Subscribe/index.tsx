@@ -4,9 +4,10 @@ import morfologia1 from '../../assets/morfologia-1.png'
 import morfologia2 from '../../assets/morfologia-2.png'
 import { TextField } from '../../components/TextField'
 import { useState } from 'react'
-import { object, string,number, ValidationError } from 'yup';
+import { object, string, ValidationError } from 'yup';
 import morfologiaBottom from '../../assets/morfologia-mobile.png'
 import { useMediaQuery } from 'react-responsive'
+import { Select } from '../../components/Select/index'
 
 type FormProps = {
   nome: string
@@ -28,8 +29,12 @@ type FormErrors = {
   veiculo?: string
 }
 
-type MyObjectType = {
+type MyObjectFormType = {
   [key: number]: { label: string; name: string, placeholder: string, text: string | number | null, erro?: string};
+};
+
+type MyObjectSelectType = {
+  [key: number]: { label: string; name: string, placeholder: string, options: string[] };
 };
 
 const formSchema = object({
@@ -37,9 +42,9 @@ const formSchema = object({
   telefone: string().default('').required("Preencha seu telefone corretamente."),
   email: string().default('').email("E-mail precisa ser válido.").required("Preencha seu e-mail corretamente."),
   profissao: string().default(''),
-  renda: number().default(null).nullable(),
-  estado: string().default(''),
   veiculo: string().default(''),
+  estado: string().default(''),
+  renda: string().default(''),
 });
 
 export function Subscribe() {
@@ -79,17 +84,11 @@ export function Subscribe() {
       })
   }
 
-  function sendForm() {
-    console.log(form)
-    const response = fetch("https://n8n.fehshop.com/webhook/pag-nova", {
-      method: "POST",
-      body: JSON.stringify(form),
-      headers: { "Content-Type": "application/json" },
-    });
-
-    alert("Cadastro realizado com sucesso!")
-
-    return response;
+  function handleSelectValue(value: string) {
+    setForm({
+      ...form,
+      [SelectSteps[step].name]: value,
+    })
   }
 
   function logon() {
@@ -117,7 +116,20 @@ export function Subscribe() {
   });
   }
 
-  const FormSteps: MyObjectType = {
+    function sendForm() {
+    console.log(form)
+    const response = fetch("https://n8n.fehshop.com/webhook/pag-nova", {
+      method: "POST",
+      body: JSON.stringify(form),
+      headers: { "Content-Type": "application/json" },
+    });
+
+    alert("Cadastro realizado com sucesso!")
+
+    return response;
+  }
+
+  const FormSteps: MyObjectFormType = {
     0: {
       label: "Nome completo *",
       name: "nome",
@@ -140,63 +152,88 @@ export function Subscribe() {
       erro: erros.email
     },
     3: {
-      label: "Renda familiar",
-      name: "renda",
-      placeholder: "Digite sua renda aqui",
-      text: form.renda,
-      erro: erros.renda
-    },
-    4: {
-      label: "Estado civil",
-      name: "estado",
-      placeholder: "Digite seu estado civil aqui",
-      text: form.estado,
-      erro: ""
-    },
-    5: {
       label: "Veículo",
       name: "veiculo",
       placeholder: "Digite seu veiculo aqui",
       text: form.veiculo,
       erro: ""
     },
-    6: {
+    4: {
       label: "Profissão",
       name: "profissao",
       placeholder: "Digite sua profissão",
       text: form.profissao,
       erro: ""
     },
+    5: {
+      label: "Estado civil",
+      name: "estado",
+      placeholder: "Digite seu estado civil aqui",
+      text: form.estado,
+      erro: ""
+    },
+    6: {
+      label: "Renda familiar",
+      name: "renda",
+      placeholder: "Digite sua renda aqui",
+      text: form.renda,
+      erro: erros.renda
+    },
   };
+
+  const SelectSteps: MyObjectSelectType = {
+    5: {
+      label: "Estado civil",
+      name: "estado",
+      placeholder: "Selecione seu estado civil",
+      options: ["Solteiro", "Casado", "Divorciado", "Viúvo", "União Estável"]
+    },
+    6: {
+      label: "Renda familiar",
+      name: "renda",
+      placeholder: "Selecione sua renda",
+      options: ["Entre R$1.000 e R$3.000", "Entre R$4.000 e R$7.000", "Entre R$8.000 em Diante"]
+    }
+  }
 
   return (
         <div className='subscribe'>
           <div className='form'>
         {
           isMobile && (<div className='morfologia-left-subscribe'>
-          <img src={morfologia1} width={270} />
+          <img className='morfologia-subscribe' src={morfologia1} />
         </div>)
         }
           <div className='content-subscribe'>
-            <TextField
-              label={FormSteps[step].label}
-              name={FormSteps[step].name}
-              text={FormSteps[step].text?.toString() || ''}
-              placeholder={FormSteps[step].placeholder} errorMessage={FormSteps[step].erro}
-              onChange={(e) =>
-                setForm({
-                  ...form,
-                  [FormSteps[step].name]: e.target.value,
-                })}
-              onBlur={(e) => validateField(FormSteps[step].name as keyof FormProps, e.target.value)}
-            />
+            {
+              step < 5 && (
+                <TextField
+                  label={FormSteps[step].label}
+                  name={FormSteps[step].name}
+                  text={FormSteps[step].text?.toString() || ''}
+                  placeholder={FormSteps[step].placeholder} errorMessage={FormSteps[step].erro}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      [FormSteps[step].name]: e.target.value,
+                    })}
+                  onBlur={(e) => validateField(FormSteps[step].name as keyof FormProps, e.target.value)}
+              />
+              )
+            }
+
+            {
+              step >= 5 && (
+                <Select onClick={handleSelectValue} label={SelectSteps[step].label} options={SelectSteps[step].options} />
+              )
+            }
           <div className='div-button-subscribe'>
             <Button text={step == 6 ? 'CADASTRAR' : 'AVANÇAR'} onClick={step == 6 ? logon : handleChangeStep} />
           </div>
         </div>
         {
           isMobile && (<div className='morfologia-right-subscribe'>
-          <img src={morfologia2} width={270} />
+          <img className='morfologia-subscribe' src={morfologia2} />
         </div>)
         }
       </div>

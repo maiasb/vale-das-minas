@@ -57,7 +57,6 @@ export function Subscribe() {
   })
 
   function handleChangeStep() {
-    // validateField(FormSteps[step].name as keyof FormProps, FormSteps[step].text)
     formSchema
       .validateAt(FormSteps[step].name, { [FormSteps[step].name]: FormSteps[step].text })
       .then(() => {
@@ -81,6 +80,7 @@ export function Subscribe() {
   }
 
   function sendForm() {
+    console.log(form)
     const response = fetch("https://n8n.fehshop.com/webhook/pag-nova", {
       method: "POST",
       body: JSON.stringify(form),
@@ -181,7 +181,7 @@ export function Subscribe() {
             <TextField
               label={FormSteps[step].label}
               name={FormSteps[step].name}
-              text={FormSteps[step].text?.toString()}
+              text={FormSteps[step].text?.toString() || ''}
               placeholder={FormSteps[step].placeholder} errorMessage={FormSteps[step].erro}
               onChange={(e) =>
                 setForm({

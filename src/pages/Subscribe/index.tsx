@@ -37,10 +37,32 @@ type MyObjectSelectType = {
   [key: number]: { label: string; name: string, placeholder: string, options: string[] };
 };
 
+// const formSchema = object({
+//   nome: string().default('').required("Preencha seu nome corretamente.").matches(/^[A-Za-zÀ-ÿ\s]+$/, "O nome deve conter apenas letras."),
+//   telefone: string().default('').required("Preencha seu telefone corretamente."),
+//   email: string().default('').email("E-mail precisa ser válido.").required("Preencha seu e-mail corretamente."),
+//   profissao: string().default(''),
+//   veiculo: string().default(''),
+//   estado: string().default(''),
+//   renda: string().default(''),
+// });
+
 const formSchema = object({
-  nome: string().default('').required("Preencha seu nome corretamente."),
-  telefone: string().default('').required("Preencha seu telefone corretamente."),
-  email: string().default('').email("E-mail precisa ser válido.").required("Preencha seu e-mail corretamente."),
+  nome: string()
+    .default('')
+    .required("Preencha seu nome corretamente.")
+    .matches(/^[A-Za-zÀ-ÿ\s]+$/, "O nome deve conter apenas letras."),
+
+  telefone: string()
+    .default('')
+    .required("Preencha seu telefone corretamente.")
+    .matches(/^[0-9()+-\s]+$/, "O telefone deve conter apenas números."),
+
+  email: string()
+    .default('')
+    .email("E-mail precisa ser válido.")
+    .required("Preencha seu e-mail corretamente."),
+
   profissao: string().default(''),
   veiculo: string().default(''),
   estado: string().default(''),
@@ -213,10 +235,27 @@ export function Subscribe() {
                   text={FormSteps[step].text?.toString() || ''}
                   placeholder={FormSteps[step].placeholder} errorMessage={FormSteps[step].erro}
                   onChange={(e) =>
-                    setForm({
-                      ...form,
-                      [FormSteps[step].name]: e.target.value,
-                    })}
+                    {
+                      if (step == 0) {
+                        setForm({
+                          ...form,
+                          [FormSteps[step].name]: e.target.value.replace(/[^A-Za-zÀ-ÿ\s]/g, ""),
+                        })
+                      }
+                      else if (step == 1) {
+                            setForm({
+                          ...form,
+                          [FormSteps[step].name]: e.target.value.replace(/[^0-9()+-\s]/g, ""),
+                        })
+                      }
+                      else {
+                        setForm({
+                          ...form,
+                          [FormSteps[step].name]: e.target.value,
+                        })
+                      }
+                    }
+                  }
                   onBlur={(e) => validateField(FormSteps[step].name as keyof FormProps, e.target.value)}
               />
               )

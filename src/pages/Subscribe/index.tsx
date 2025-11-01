@@ -14,7 +14,7 @@ type FormProps = {
   profissao: string
   telefone: string
   email: string
-  renda: number | null
+  renda: string
   estado: string
   veiculo: string
 }
@@ -56,7 +56,7 @@ export function Subscribe() {
     profissao: "",
     telefone: "",
     email: "",
-    renda: null,
+    renda: "",
     estado: "",
     veiculo: "",
   })
@@ -186,7 +186,7 @@ export function Subscribe() {
       label: "Estado civil",
       name: "estado",
       placeholder: "Selecione seu estado civil",
-      options: ["Solteiro", "Casado", "Divorciado", "Viúvo", "União Estável"]
+      options: ["Solteiro", "Casado", "Divorciado", "Viúvo", "União Estável"],
     },
     6: {
       label: "Renda familiar",
@@ -224,7 +224,7 @@ export function Subscribe() {
 
             {
               step >= 5 && (
-                <Select onClick={handleSelectValue} label={SelectSteps[step].label} options={SelectSteps[step].options} />
+                <Select onClick={handleSelectValue} label={SelectSteps[step].label} options={SelectSteps[step].options} form={form} />
               )
             }
           <div className='div-button-subscribe'>

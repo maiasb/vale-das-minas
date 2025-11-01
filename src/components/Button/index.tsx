@@ -9,7 +9,7 @@ type ButtonProps = {
 function Button({fullWidth = false, text, onClick}:ButtonProps) {
 
   return (
-    <button style={{width: `${fullWidth ? '100%' : ''}`}} onClick={onClick}>{text}</button>
+    <button className='button' style={{width: `${fullWidth ? '100%' : ''}`}} onClick={onClick}>{text}</button>
   )
 }
 
